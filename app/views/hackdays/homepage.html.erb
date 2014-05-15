@@ -10,7 +10,9 @@
     <div class="row"> 
       <div class="col-md-12"> 
         <div class="upper_container">
-          <a href=<%= hackday_path(@hackday)%> class="btn btn-default">Latest Hack</a>
+          <% if @hackday %>
+            <a href=<%= hackday_path(@hackday)%> class="btn btn-default">Latest Hack</a>
+          <% end %>
         </div>
       </div>
     </div>

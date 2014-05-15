@@ -1,7 +1,11 @@
 class HackdaysController < ApplicationController
 	def homepage
-		# launch the homepage, which has a link to the latest hack
-		@hackday = Hackday.order("created_at").last
+		# launch the homepage, which has a link to the latest hack.  
+		begin
+		  @hackday = Hackday.order("created_at").last
+		rescue ActiveRecord::RecordNotFound => e
+		  @hackday = nil
+		end
 	end
 
 	def index
@@ -49,7 +53,7 @@ class HackdaysController < ApplicationController
 			#session previously did not exist.  initialize
 			session[votes_left_key()] = 3
 		end
-		
+
 		@votes_left = session[votes_left_key()]
 	end
 
