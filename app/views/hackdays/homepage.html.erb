@@ -1,0 +1,60 @@
+<html> 
+<head>
+
+</head>
+<title>Heyzap Hack Log</title>
+<body> 
+  <%= render 'navbar' %>
+
+  <div id="main_container" class="container" data-controller="homepage"> 
+    <div class="row"> 
+      <div class="col-md-12"> 
+        <div class="upper_container">
+          <a href=<%= hackday_path(@hackday)%> class="btn btn-default">Latest Hack</a>
+        </div>
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-md-12 front_logo">
+        <img src="/assets/heyzap.png">
+        <h1>hacklog</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="lower_container"> 
+          <button id="new_hack_button" type="button" class="btn btn-default">New Hack</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="myModal" class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <h1> add new HACKDAY </h1>
+        <form id="new_hackday_form" accept-charset="UTF-8" action="/hackdays" method="post">
+          <p>
+            <label for="hackday_title">Title</label><br>
+            <input id="hackday_title" name="title" size="30" type="text" value="">
+          </p>
+          <p>
+            <label for="hackday_img_url">Img url</label><br>
+            <input id="hackday_img_url" name="img_url" size="30" type="text" value="">
+          </p>
+
+          <p>
+            <label for="hackday_day">Day</label><br>
+            <input id="hackday_day" name="day" size="30" type="text">
+          </p>
+          <p>
+            <button id="hackday_submit_button" type="button" class="btn btn-default">Submit</button>
+          </p>
+        </form>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+</body>
+</html>

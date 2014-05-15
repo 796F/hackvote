@@ -1,0 +1,59 @@
+<html> 
+<head> 
+</head>
+<body> 
+
+  <%= render 'hackdays/navbar' %>
+
+  <div id="main_container" class="container" data-controller="hackday"> 
+
+    <h1> Hackday: <%= @hackday.title %> </h1>
+    <h2> these hacks belong to date: <%= @hackday.day %> </h2>
+    <h2> votes left <div id="votes_left"><%= @votes_left %><div> </h2> 
+    <% if @prev_hackday %>
+      <%= link_to "Prevoius Day", hackday_path(@prev_hackday), { :class=>"btn btn-default" } %>
+    <% end %>
+    
+
+    <% @hackday.hacks.each do |hack| %>
+    <div style="border: 1px solid black;">
+      <h1><%= link_to hack.title, hack_path(hack) %></h1>
+      <h3> By <%= hack.owner.name %> </h3>
+      <h3> url: <%= hack.hack_url %> </h3>
+      <h3> votes: <div class="vote_holder"><%= hack.votes %><div> </h3>
+      <button type="button" class="btn btn-default vote_button" data-hack-id=<%= hack.id %>>Vote for this Hack</button>
+    </div>
+    <% end %>
+
+    <h1> add new hack </h1>
+    <%= form_for :hack, url: hacks_path do |h| %>
+
+    <p>
+      <%= h.label :title %><br>
+      <%= h.text_field :title %>
+    </p>
+    <p>
+      <%= h.label :img_url %><br>
+      <%= h.text_field :img_url %>
+    </p>
+    <p>
+      <%= h.label :hack_url %><br>
+      <%= h.text_field :hack_url %>
+    </p>
+
+    <p>
+      <%= h.label :owner %><br>
+      <%= h.text_field :owner %>
+    </p>
+    <p>
+      <%= h.label :description %><br>
+      <%= h.text_field :description %>
+    </p>
+    <p>
+      <%= h.submit %>
+    </p>
+    <% end %>
+
+  </div>
+</body>
+</html>
