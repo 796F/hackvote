@@ -15,8 +15,9 @@ Hackvote::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :hackdays
-  resources :hacks
+  resources :hackdays, :only => [:homepage, :create, :show]
+  resources :hacks, :only => [:create, :update]
+  
 
   # Sample resource route with options:
   #   resources :products do
