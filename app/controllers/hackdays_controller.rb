@@ -15,7 +15,7 @@ class HackdaysController < ApplicationController
       resp = { :code => true }
       render json: resp.to_json
     else
-      render :status => :bad_request, :text => "Failed to create Hackday"
+      render :status => :bad_request, :text => @hackday.errors.full_messages
     end
   end
 
