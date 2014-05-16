@@ -1,5 +1,4 @@
 Hackvote::Application.routes.draw do
-  get "hackday/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -15,10 +14,10 @@ Hackvote::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :hackdays, :only => [:homepage, :create, :show]
-  resources :hacks, :only => [:create, :update]
+  resources :hackdays, :only => [:index, :create, :show] do
+    resources :hacks, :only => [:create, :update]
+  end
   
-
   # Sample resource route with options:
   #   resources :products do
   #     member do
@@ -54,7 +53,7 @@ Hackvote::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'hackdays#homepage'
+  root :to => 'hackdays#index'
 
   # See how all your routes lay out with "rake routes"
 
