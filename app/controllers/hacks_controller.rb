@@ -1,23 +1,14 @@
 class HacksController < ApplicationController
-  
-  def new
-    # this is the dialog popup for creating a new hack.  nothing needed from rails. 
-  end
-
-  def edit
-    # doesn't exist, were not editing any hacks.  
-  end
 
   def create
     # currently the json pushed in contains data for 2 objects, not one.  so must extract from param.  
     form_data = params[:hack]
     # get the hackday from session.  
-    hackday_id = session[:current_hackday_id]
-    @hackday = Hackday.find(hackday_id)
+    @hackday = Hackday.find_by_id(session[:current_hackday_id])
     # create a hack object from some of the parameters
-    hack = Hack.new(hack_url: form_data[:hack_url], img_url: form_data[:img_url], title: form_data[:title], votes:0)
+    hack = Hack.new(:hack_url => form_data[:hack_url], img_url: form_data[:img_url], title: form_data[:title], votes:0)
     # create an owner from the owner's name parameter
-    hack.create_owner(name: form_data[:owner])
+    hack.create_owner(:name => form_data[:owner])
     # assign the hack to that hackday
     hack.hackday = @hackday
     if hack.save
@@ -30,30 +21,27 @@ class HacksController < ApplicationController
 
   def update
     # PUT here to increase the vote on a certain hack
-    hack = Hack.find(params[:id])
+    hack = Hack.find_by_id(params[:id])
     if session[votes_left_key()] < 1
       # out of votes.  do not change anything.  return old vote.  
-      code = -1
-      msg = "Failed to Vote"
+      code = false
+      msg = "out of votes"
     else
       # increase the votes by 1
       hack.votes += 1
       if hack.save
-        session[votes_left_key()] -= 1
-        code = 1
-        msg = "Vote Successful"
+        session[votes_left_key()] -= 1        
+        msg = "Voted Successfully"
+        code = true
       else
-        code = -2
-        msg = "Error Voting"
+        render :status => :bad_request, :text => @hack.errors.full_messages
       end
     end
-    resp = { :code => code, :msg => msg, :votes => hack.votes }
-    render json: resp.to_json
-
+    render json: { :code => code, :msg => msg, :votes => hack.votes }
   end
 
   def show
     # display the particular hack
-    @hack = Hack.find(params[:id])
+    @hack = Hack.find_by_id(params[:id])
   end
 end
