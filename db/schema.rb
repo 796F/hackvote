@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140515182430) do
+ActiveRecord::Schema.define(:version => 20140516221142) do
 
   create_table "hackdays", :force => true do |t|
     t.string   "title"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20140515182430) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.text     "description"
+    t.string   "owner"
   end
 
   add_index "hacks", ["hackday_id"], :name => "index_hacks_on_hackday_id"
