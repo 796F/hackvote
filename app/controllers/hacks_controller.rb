@@ -2,8 +2,7 @@ class HacksController < ApplicationController
 
   def create
     @hackday = Hackday.find_by_id(params[:hackday_id])
-    hack = Hack.create(params[:hack].merge({:hackday_id => params[:hackday_id]}))
-    
+    hack = @hackday.hacks.create(params[:hack])
     if hack.valid?
       redirect_to hackday_path(@hackday)
     else

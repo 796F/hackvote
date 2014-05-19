@@ -2,6 +2,16 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 
+# pry is a debugger for ruby.  amazing tools - max
+gem 'pry'
+# live syntax highlighting for pry console session
+gem 'pry-coolline'
+# allows next-line in pry.  
+gem 'pry-debugger'
+# hit exception, auto load debugger
+gem 'pry-rescue'
+gem 'pry-rails'
+
 gem 'bootstrap-sass'
 # apparently webrick has some issues? using thin
 gem 'thin'
