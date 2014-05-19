@@ -80,7 +80,7 @@ HACKVOTE = {
             },
             dataType: 'json',
             success: function (data) {
-              if (data['code'] == 1){
+              if (data['success'] == true){
                 // successfully voted.  update the vote count, 
                 vote_holder.html(data.votes);
                 // decrease votes left.  
