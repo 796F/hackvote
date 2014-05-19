@@ -8,7 +8,7 @@ class HackdaysController < ApplicationController
     # hackday popup posts here to create new hackdays, data is stored, and we respond with json.
     @hackday = Hackday.create(params[:hackday])
     if @hackday.valid?
-      render :json => { :code => true }
+      redirect_to hackday_path(@hackday)
     else
       render :status => :bad_request, :text => @hackday.errors.full_messages
     end

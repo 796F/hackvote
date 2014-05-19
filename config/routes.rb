@@ -15,7 +15,7 @@ Hackvote::Application.routes.draw do
   #   resources :products
 
   resources :hackdays, :only => [:index, :create, :show] do
-    resources :hacks, :only => [:create, :update]
+    resources :hacks, :only => [:create, :show, :update]
   end
   
   # Sample resource route with options:

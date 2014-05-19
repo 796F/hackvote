@@ -4,12 +4,14 @@
 </head>
 <title>Heyzap Hack Log</title>
 <body>
-  
+
   <div id="main_container" class="container" data-controller="homepage"> 
     <div class="row"> 
       <div class="col-md-12"> 
         <div class="upper_container">
+          <% if @hackday %>
           <%= link_to 'hackdays', hackday_path(@hackday) %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -31,7 +33,17 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <h1> add new HACKDAY </h1>
-        <form id="new_hackday_form" accept-charset="UTF-8" action="/hackdays" method="post">
+        <%= form_for :hackday, :html => { :id => "new_hackday_form" }, :url => hackdays_path do |h| %>
+          <% [:title, :img_url, :day].each do |attribute| %>
+            <p>
+              <%= h.label attribute %><br>
+              <%= h.text_field attribute %>
+            </p>
+          <% end %>
+          <%= h.submit 'Create Hackday', :class => "btn btn-default" %>
+        <% end %>
+
+        <!-- <form id="new_hackday_form" accept-charset="UTF-8" action="/hackdays" method="post">
           <p>
             <label for="hackday_title">Title</label><br>
             <input id="hackday_title" name="title" size="30" type="text" value="">
@@ -46,13 +58,13 @@
             <input id="hackday_day" name="day" size="30" type="text">
           </p>
           <p>
-          <button id="hackday_submit_button" type="button" class="btn btn-default">Submit</button>
+            <button id="hackday_submit_button" type="button" class="btn btn-default">Submit</button>
           </p>
-</form>
+        </form> -->
 
+      </div>
     </div>
   </div>
-</div>
 
 
 </body>

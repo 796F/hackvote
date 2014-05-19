@@ -43,26 +43,25 @@ HACKVOTE = {
         $('#myModal').modal('show');
       });
 
-      // this is going to be replaced by a .submit from a for_for form.  
-      // $('#hackday_submit_button').click(function() {
-      //   var data = JSON.stringify($('#new_hackday_form').serializeObject());
-      //   $.ajax({
-      //     url: "/hackdays",
-      //     type: 'post',
-      //     data: data,
-      //     headers: {
-      //         'content-type': 'application/json'   //If your header name has spaces or any other char not appropriate
-      //     },
-      //     dataType: 'json',
-      //     success: function (data) {
-      //         console.log(data);
-      //         $('#myModal').modal('hide');
-      //     },
-      //     error: function(data){
-      //       console.log(data);
-      //     }
-      //   });      
-      // });
+      $('#hackday_submit_button').click(function() {
+        var data = JSON.stringify($('#new_hackday_form').serializeObject());
+        $.ajax({
+          url: "/hackdays",
+          type: 'post',
+          data: data,
+          headers: {
+              'content-type': 'application/json'   //If your header name has spaces or any other char not appropriate
+          },
+          dataType: 'json',
+          success: function (data) {
+              console.log(data);
+              $('#myModal').modal('hide');
+          },
+          error: function(data){
+            console.log(data);
+          }
+        });      
+      });
     }
   },
 
@@ -71,10 +70,10 @@ HACKVOTE = {
       $('.vote_button').each(function(){
         //grab the id from the button's data-
         $(this).click(function(){
-          hid = $(this).attr("data-hack-id");
+          vote_url = $(this).attr("data-vote-url");
           vote_holder = $(this).parent().find('.vote_holder');
           $.ajax({
-            url: "/hacks/" + hid,
+            url: vote_url,
             type: 'PUT',
             headers: {
                 'content-type': 'application/json'   //If your header name has spaces or any other char not appropriate

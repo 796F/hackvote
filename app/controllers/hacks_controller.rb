@@ -1,10 +1,9 @@
 class HacksController < ApplicationController
 
   def create
-    # currently the json pushed in contains data for 2 objects, not one.  so must extract from param.  
-    @hackday = Hackday.find_by_id(:hackday_id)
-    hack = Hack.create(params[:hack])
-    hack.hackday = @hackday
+    @hackday = Hackday.find_by_id(params[:hackday_id])
+    hack = Hack.create(params[:hack].merge({:hackday_id => params[:hackday_id]}))
+    
     if hack.valid?
       redirect_to hackday_path(@hackday)
     else
